@@ -22,8 +22,28 @@ const fetchBook = (request, h) => {
   });
 };
 
-const fetchBooks = (_, h) => {
-  const bookList = books.map((book) => {
+const fetchBooks = (request, h) => {
+  const { finished, name, reading } = request.query;
+
+  let newBooks = books;
+
+  if (reading) {
+    const hasReading = reading === "1";
+    newBooks = books.filter((book) => book.reading === hasReading);
+  }
+
+  if (finished) {
+    const hasFinished = finished === "1";
+    newBooks = books.filter((book) => book.finished === hasFinished);
+  }
+
+  if (name) {
+    newBooks = books.filter((book) => {
+      return book.name.toUpperCase().includes(name.toUpperCase());
+    });
+  }
+
+  const bookList = newBooks.map((book) => {
     return {
       id: book.id,
       name: book.name,
@@ -57,14 +77,14 @@ const storeBook = (request, h) => {
 
   const id = nanoid(16);
   const finished = request.payload.readPage === request.payload.pageCount;
-  const createdAt = new Date().toISOString();
-  const updatedAt = createdAt;
+  const insertedAt = new Date().toISOString();
+  const updatedAt = insertedAt;
 
   const newBook = {
     ...request.payload,
     id,
     finished,
-    createdAt,
+    insertedAt,
     updatedAt,
   };
 
