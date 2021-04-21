@@ -10,6 +10,7 @@ module.exports = {
     ecmaVersion: 12,
   },
   rules: {
+    "arrow-body-style": 0,
     quotes: [2, "double", "avoid-escape"],
     "prettier/prettier": "error",
   },
