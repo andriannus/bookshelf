@@ -1,17 +1,18 @@
 const Hapi = require("@hapi/hapi");
 
 const { bookRoutes } = require("./book/book.routes");
+const { config } = require("./shared/constants/config.constant");
 
 const init = async () => {
   const server = Hapi.server({
-    port: 9090,
-    host: "localhost",
+    port: config.server.PORT,
+    host: config.server.HOST,
   });
 
-  server.route([].concat(bookRoutes));
+  server.route([...bookRoutes]);
 
   await server.start();
-  console.log("Server starting on port: 9090");
+  console.log(`Server starting on port: ${config.server.PORT}`);
 };
 
 process.on("unhandledRejection", (err) => {
