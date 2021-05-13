@@ -2,10 +2,13 @@
   "name": "bookshelf",
   "version": "1.0.0",
   "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
-  "main": "server.js",
+  "keywords": [
+    "Dicoding",
+    "Hapi"
+  ],
+  "license": "MIT",
+  "author": "Andre Simamora",
+  "main": "./src/server.js",
   "scripts": {
     "start": "node ./src/server.js"
   },
